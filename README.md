@@ -98,11 +98,10 @@ done
 
 ## Legal Disclaimer
 
-⚠️ **IMPORTANT**: This tool is for authorized use and educational purposes only.
+⚠️ **IMPORTANT**: This tool is for authorized security testing and educational purposes only.
 
-- Only protect PDFs you own or have permission to protect
-- Use strong passwords
-- Store passwords securely
+- Only protect PDFs you own or have explicit written authorization to protect
+- Follow responsible disclosure practices
 - Comply with all applicable laws and regulations
 
 ## Contributing
@@ -120,4 +119,4 @@ This project is for educational purposes only. Use responsibly and ethically.
 
 ---
 
-**Remember**: Use strong passwords and store them securely!
+**Remember**: Always use strong passwords when protecting PDFs!
