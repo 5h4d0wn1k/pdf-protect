@@ -4,78 +4,63 @@
 > prohibited and may be illegal. Read [ETHICS.md](ETHICS.md) and
 > [SCOPE.md](SCOPE.md) before use. Use at your own risk; **AS IS**, no warranty.
 
-# PDF Protection Tool
+# PDF Protect — PDF Password Protection & Encryption Tool
 
-⚠️ **EDUCATIONAL PURPOSE ONLY** - This tool is designed for authorized security testing and educational purposes.
+PDF Protect is a small command-line utility that encrypts PDF files with a
+user password using **PyPDF2**. It is built for educational learning about
+**PDF security**, document **encryption**, and authorized security testing of
+your own PDF workflows.
 
-## Overview
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/5h4d0wn1k/pdf-protect)](https://github.com/5h4d0wn1k/pdf-protect/stargazers)
+[![Last commit](https://img.shields.io/github/last-commit/5h4d0wn1k/pdf-protect)](https://github.com/5h4d0wn1k/pdf-protect/commits)
+[![Issues](https://img.shields.io/github/issues/5h4d0wn1k/pdf-protect)](https://github.com/5h4d0wn1k/pdf-protect/issues)
 
-A simple PDF password protection tool that adds encryption and password protection to PDF files. Useful for learning about PDF security and protecting sensitive documents.
+Password-protect a PDF in one command: point it at an input file, a destination
+file, and a password, and it writes an encrypted PDF ready for safe sharing.
+
+## Why PDF Protect
+
+Password protection is one of the simplest and most widely used access controls
+for documents. PDF Protect demos the underlying mechanism — reading a PDF,
+walking its pages, and encrypting the output via PyPDF2 — so you learn exactly
+what "protecting a PDF" means under the hood. Used responsibly on documents you
+own, it's a practical building block for handling sensitive PDFs (contracts,
+invoices, reports) and for understanding what attackers might or might not be
+able to do with an unprotected file.
 
 ## Features
 
-- **Password Protection**: Add password protection to PDF files
-- **Encryption**: Encrypt PDF files with user password
-- **Simple Interface**: Easy-to-use command-line tool
-- **Educational**: Learn about PDF security
+- **Password encryption** — encrypts a PDF so a user password is required to
+  open it (`writer.encrypt(password)` via PyPDF2).
+- **Page preservation** — every page of the input document is copied to the
+  output before encryption.
+- **Simple CLI** — three required flags: `--input`, `--output`, `--password`.
+- **Verified dependency** — requires `PyPDF2>=3.0.0` (`requirements.txt`).
+- **Clear output** — prints `[+] Protected PDF written to <path>` on success
+  and exits non-zero with a hint if PyPDF2 is missing.
 
-## Installation
+## Quickstart
 
-### Requirements
-
-- Python 3.8+
-- PyPDF2 library
-
-### Setup
+Prerequisites: Python 3.8+ and PyPDF2.
 
 ```bash
-# Clone the repository
-git clone https://github.com/5h4d0wn1k/pdf-protect.git
-cd pdf-protect
-
 # Install dependencies
-pip install PyPDF2
+pip install -r requirements.txt
 
-# Verify installation
+# Check the CLI
 python pdf_protect.py --help
-```
 
-## Usage
-
-### Basic Usage
-
-```bash
-# Protect a PDF with password
+# Protect a PDF
 python pdf_protect.py \
   --input document.pdf \
   --output protected.pdf \
   --password "SecurePassword123!"
 ```
 
-## Command-Line Options
-
-| Option | Description |
-|--------|-------------|
-| `--input` | Source PDF file (required) |
-| `--output` | Destination protected PDF file (required) |
-| `--password` | Password to protect PDF (required) |
-
-## Examples
-
-### Example 1: Protect a Document
+### Batch protect several PDFs
 
 ```bash
-# Add password protection
-python pdf_protect.py \
-  --input sensitive_document.pdf \
-  --output protected_document.pdf \
-  --password "MySecurePassword123!"
-```
-
-### Example 2: Batch Protection
-
-```bash
-# Protect multiple PDFs
 for pdf in *.pdf; do
   python pdf_protect.py \
     --input "$pdf" \
@@ -84,69 +69,33 @@ for pdf in *.pdf; do
 done
 ```
 
-## Output
+## Project structure
 
 ```
-[+] Protected PDF written to protected.pdf
+pdf_protect.py    the CLI/encryption entry point
+requirements.txt  Python dependencies (PyPDF2)
+LICENSE           MIT license
+ETHICS.md         intended use and authorization rules
+SCOPE.md          the four-question authorized-testing checklist
+SECURITY.md       vulnerability reporting
 ```
 
-## Security Notes
+## Documentation
 
-- **Password Strength**: Use strong passwords (12+ characters, mixed case, numbers, symbols)
-- **Password Storage**: Store passwords securely, don't hardcode
-- **File Permissions**: Ensure protected PDFs have appropriate file permissions
+- [ETHICS.md](ETHICS.md) — educational and authorized-use policy.
+- [SCOPE.md](SCOPE.md) — when you are allowed to run this tool.
+- [SECURITY.md](SECURITY.md) — reporting vulnerabilities.
+- [CONTRIBUTING.md](CONTRIBUTING.md) — how to contribute safely.
+- [CHANGELOG.md](CHANGELOG.md) — release history.
 
-## Use Cases
+## Security notes
 
-- **Document Security**: Protect sensitive PDF documents
-- **Educational Purposes**: Learn about PDF encryption
-- **Security Testing**: Test PDF protection mechanisms
+Use strong passwords (12+ characters, mixed case, numbers, symbols), store them
+in a secrets manager rather than hardcoding them, and keep output permissions
+restricted. This tool only protects files **you own** or are authorized to
+handle.
 
-## Contributing
-
-Contributions are welcome! Please:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
----
-
-## ⚠️ Legal Disclaimer
-
-### Educational Purpose Only
-This tool is provided strictly for **educational purposes** and **authorized security testing** only. It is intended to help security professionals and students learn about security concepts in controlled environments.
-
-### Authorized Use Only
-- You must have **explicit written authorization** before testing any system you do not own
-- Unauthorized access to computer systems is **illegal** and punishable under laws including but not limited to the Computer Fraud and Abuse Act (CFAA), Computer Misuse Act, and similar legislation worldwide
-- Only use this tool on systems you own, have permission to test, or in isolated lab environments
-
-### No Warranty
-This software is provided "AS IS" without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and noninfringement. The author makes no representations or warranties regarding the accuracy, completeness, or reliability of this software.
-
-### Limitation of Liability
-**In no event shall the author (Nikhil Nagpure) be liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of this software, even if advised of the possibility of such damage.**
-
-### User Responsibility
-- The user assumes **full responsibility** for any consequences resulting from the use of this tool
-- The author is **not responsible** for any misuse, damage, or illegal activities performed with this software
-- Users are solely responsible for ensuring compliance with all applicable local, state, national, and international laws and regulations
-
-### Indemnification
-By using this software, you agree to **indemnify, defend, and hold harmless** the author from and against any and all claims, liabilities, damages, losses, costs, and expenses (including reasonable attorneys fees) arising from or related to your use of this software.
-
-### Responsible Disclosure
-If you discover vulnerabilities using this tool, please follow responsible disclosure practices and report them to the affected parties through appropriate channels.
-
----
-
-**By using this software, you acknowledge that you have read, understood, and agree to be bound by this disclaimer.**
 ## License
 
-This project is for educational purposes only. Use responsibly and ethically.
-
----
-
-**Remember**: Always use strong passwords when protecting PDFs!
+[MIT](LICENSE). Educational and authorized-use software — use at your own risk.
+By using it you accept full responsibility for lawful use in your jurisdiction.
