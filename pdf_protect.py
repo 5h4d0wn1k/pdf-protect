@@ -30,7 +30,7 @@ def protect_pdf(input_path: str, output_path: str, password: str) -> None:
         from PyPDF2 import PdfReader, PdfWriter  # type: ignore
     except Exception:
         print("PyPDF2 not installed. pip install PyPDF2", file=sys.stderr)
-        sys.exit(1)
+        raise
 
     reader = PdfReader(input_path)
     writer = PdfWriter()
